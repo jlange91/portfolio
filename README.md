@@ -17,14 +17,16 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 
 ### Scripts disponibles
 
-| Commande | Description |
-|---|---|
-| `npm run dev` | Serveur de développement |
-| `npm run build` | Build de production |
-| `npm run start` | Serveur de production (après build) |
-| `npm run lint` | Linter ESLint |
-| `npm run format` | Formatage Prettier |
-| `npm run format:check` | Vérification du formatage |
+| Commande               | Description                         |
+| ---------------------- | ----------------------------------- |
+| `npm run dev`          | Serveur de développement            |
+| `npm run build`        | Build de production                 |
+| `npm run start`        | Serveur de production (après build) |
+| `npm run lint`         | Linter ESLint                       |
+| `npm run format`       | Formatage Prettier                  |
+| `npm run format:check` | Vérification du formatage           |
+| `npm test`             | Tests unitaires (Vitest)            |
+| `npm run test:watch`   | Tests en mode watch                 |
 
 ---
 
@@ -36,10 +38,12 @@ Copier `.env.example` en `.env.local` et renseigner les valeurs :
 cp .env.example .env.local
 ```
 
-| Variable | Obligatoire | Description |
-|---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Non | URL de production (défaut : `https://julien-lange.dev`) |
-| `RESEND_API_KEY` | Non | Clé API Resend pour le formulaire de contact. Si absente, le formulaire affiche un fallback mailto. |
+| Variable               | Obligatoire | Description                                                                                         |
+| ---------------------- | ----------- | --------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Non         | URL de production (défaut : `https://julienlange.dev`)                                              |
+| `RESEND_API_KEY`       | Non         | Clé API Resend pour le formulaire de contact. Si absente, le formulaire affiche un fallback mailto. |
+
+> Le formulaire de contact inclut un rate limiting (5 requêtes/heure par IP) et une validation Zod côté serveur.
 
 ---
 
@@ -57,7 +61,7 @@ Un fichier `.docx` est présent dans `/public/`. Pour activer le téléchargemen
 ## Configurer le formulaire de contact (Resend)
 
 1. Créer un compte sur [resend.com](https://resend.com)
-2. Ajouter et vérifier le domaine `julien-lange.dev` (ou utiliser l'email de test Resend)
+2. Ajouter et vérifier le domaine `julienlange.dev` (ou utiliser l'email de test Resend)
 3. Créer une clé API
 4. Ajouter `RESEND_API_KEY=re_xxxxx` dans `.env.local` (dev) ou dans les variables Vercel (prod)
 
@@ -69,13 +73,13 @@ Sans clé, le formulaire reste fonctionnel avec un fallback vers `mailto:`.
 
 Tout le contenu est centralisé dans `lib/data/` — éditable en TypeScript :
 
-| Fichier | Contenu |
-|---|---|
-| `lib/data/site.ts` | Nom, email, LinkedIn, GitHub, URL du site |
-| `lib/data/experiences.ts` | Expériences professionnelles (timeline) |
-| `lib/data/skills.ts` | Compétences par catégorie |
-| `lib/data/projects.ts` | Projets clés |
-| `lib/data/education.ts` | Formation & certifications |
+| Fichier                   | Contenu                                                  |
+| ------------------------- | -------------------------------------------------------- |
+| `lib/data/site.ts`        | Nom, email, LinkedIn, GitHub, URL du site                |
+| `lib/data/experiences.ts` | Expériences professionnelles (timeline)                  |
+| `lib/data/skills.ts`      | Compétences par catégorie (avec `level` pour le radar)   |
+| `lib/data/projects.ts`    | Projets clés                                             |
+| `lib/data/education.ts`   | Formation & certifications                               |
 
 ---
 
@@ -105,14 +109,19 @@ portfolio/
 │   ├── sitemap.ts
 │   ├── robots.ts
 │   └── api/contact/
-│       └── route.ts        # API Resend avec fallback mailto
+│       └── route.ts        # API Resend — validation Zod, rate limiting, fallback mailto
 ├── components/
-│   ├── layout/             # Nav sticky, Footer
-│   ├── sections/           # Hero, Experience, Skills, Projects, Education, Contact
-│   └── ui/                 # Badge, Section, TimelineItem, ThemeToggle, SkipLink
+│   ├── layout/             # Nav sticky (focus trap mobile), Footer
+│   ├── sections/           # Hero, Experience, Skills (radar SVG), Projects, Education, Contact
+│   └── ui/                 # Badge, Section, TimelineItem, ThemeToggle, SkipLink, RadarChart
+├── __tests__/
+│   ├── contact-route.test.ts  # Tests unitaires de la route API
+│   └── RadarChart.test.tsx    # Tests du composant SVG radar
 ├── lib/
 │   ├── data/               # Contenu statique TypeScript
 │   └── utils.ts
+├── next.config.ts          # Security headers (CSP, X-Frame-Options…)
+├── vitest.config.ts        # Config Vitest
 └── public/
     ├── CV_Julien_Lange.pdf # À ajouter
     ├── favicon.svg
@@ -133,12 +142,40 @@ Le site implémente les bonnes pratiques WCAG 2.1 AA :
 - Contrastes conformes WCAG AA sur fond sombre et fond clair
 - `aria-label` sur les liens dont le texte seul n'est pas suffisant
 - `prefers-reduced-motion` respecté (via Framer Motion `MotionConfig` + CSS)
+- `aria-live="polite"` persistant dans le formulaire (annonce les états chargement/erreur/succès aux lecteurs d'écran)
+- Focus déplacé automatiquement sur le message de confirmation après envoi
+- Focus trap dans le menu mobile + fermeture par `Escape` avec retour du focus sur le bouton hamburger
+
+## Sécurité
+
+Headers HTTP configurés dans `next.config.ts` pour toutes les routes :
+
+- `Content-Security-Policy` (adapté à Next.js + Vercel Analytics)
+- `X-Frame-Options: DENY`
+- `X-Content-Type-Options: nosniff`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+
+## Tests
+
+```bash
+npm test           # run once
+npm run test:watch # mode watch
+```
+
+Couverture actuelle :
+
+| Fichier                         | Ce qui est testé                                            |
+| ------------------------------- | ----------------------------------------------------------- |
+| `__tests__/contact-route.test.ts` | Validation Zod, trim, rate limiting (429), réponse 200   |
+| `__tests__/RadarChart.test.tsx`   | Rendu SVG, labels, axes, attribut aria-label             |
 
 ## Analytics
 
 Vercel Web Analytics + Speed Insights (cookieless, sans bannière).
 
 Événements trackés :
+
 - `cv_download` — clic sur "Télécharger mon CV"
 - `linkedin_click` — clic sur LinkedIn
 - `github_click` — clic sur GitHub

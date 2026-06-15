@@ -72,7 +72,8 @@ export const experiences: Experience[] = [
   {
     id: "42-lisboa",
     image: "/img/42Lisboa.png",
-    imageAlt: "Julien Lange encadrant une piscine à la 42 Lisboa — étudiants sur iMacs dans l'open space",
+    imageAlt:
+      "Julien Lange encadrant une piscine à la 42 Lisboa — étudiants sur iMacs dans l'open space",
     imageCaption: "42 Lisboa, 2020 — encadrement d'une piscine",
     company: "42 Lisboa",
     role: "Ingénieur Système & Encadrant Pédagogique",
@@ -106,7 +107,8 @@ export const experiences: Experience[] = [
   {
     id: "xfab",
     image: "/img/xfab.png",
-    imageAlt: "Salle blanche X-FAB — ingénieurs en combinaison stérile devant des équipements de fabrication de semi-conducteurs",
+    imageAlt:
+      "Salle blanche X-FAB — ingénieurs en combinaison stérile devant des équipements de fabrication de semi-conducteurs",
     imageCaption: "Environnement de fabrication X-FAB — industrie des semi-conducteurs",
     company: "X-FAB",
     role: "Développeur C, Systèmes Industriels",

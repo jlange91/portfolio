@@ -36,7 +36,9 @@ export default function Experience() {
                 {exp.role}
               </p>
               <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm dark:text-slate-500 text-slate-500 font-mono">
-                <span>{exp.startDate} — {exp.endDate}</span>
+                <span>
+                  {exp.startDate} — {exp.endDate}
+                </span>
                 <span aria-hidden="true">·</span>
                 <span>{exp.location}</span>
               </div>
@@ -123,7 +125,11 @@ export default function Experience() {
                     <p className="text-xs dark:text-slate-400 text-slate-600 leading-relaxed mb-3">
                       {h.description}
                     </p>
-                    <div className="flex flex-wrap gap-1.5" role="list" aria-label="Technologies utilisées">
+                    <div
+                      className="flex flex-wrap gap-1.5"
+                      role="list"
+                      aria-label="Technologies utilisées"
+                    >
                       {h.tags.map((tag) => (
                         <Badge key={tag} variant="default">
                           {tag}

@@ -28,9 +28,7 @@ export default function Section({
       aria-label={title}
       className={cn(
         "py-20 md:py-28",
-        alternate
-          ? "dark:bg-slate-800/30 bg-slate-50"
-          : "dark:bg-transparent bg-white",
+        alternate ? "dark:bg-slate-800/30 bg-slate-50" : "dark:bg-transparent bg-white",
         className
       )}
     >
@@ -48,7 +46,10 @@ export default function Section({
           <h2 className="text-3xl md:text-4xl font-bold dark:text-slate-100 text-slate-900 tracking-tight">
             {title}
           </h2>
-          <div className="mt-3 h-px w-16 bg-gradient-to-r from-brand to-accent" aria-hidden="true" />
+          <div
+            className="mt-3 h-px w-16 bg-gradient-to-r from-brand to-accent"
+            aria-hidden="true"
+          />
         </motion.div>
 
         {children}
