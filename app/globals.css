@@ -92,13 +92,15 @@ html:not(.dark) body {
 }
 
 .bg-grid {
-  background-image: linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
 .hero-gradient {
-  background: radial-gradient(ellipse at 20% 60%, rgba(46, 117, 182, 0.12) 0%, transparent 55%),
+  background:
+    radial-gradient(ellipse at 20% 60%, rgba(46, 117, 182, 0.12) 0%, transparent 55%),
     radial-gradient(ellipse at 80% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 45%);
 }
 

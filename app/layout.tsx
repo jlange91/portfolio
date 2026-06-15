@@ -82,7 +82,11 @@ const themeScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${jetbrainsMono.variable} dark`} suppressHydrationWarning>
+    <html
+      lang="fr"
+      className={`${inter.variable} ${jetbrainsMono.variable} dark`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { track } from "@vercel/analytics";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { siteConfig } from "@/lib/data/site";
@@ -17,12 +17,52 @@ const navLinks = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  // Escape key closes the mobile menu and returns focus to the hamburger button
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        hamburgerRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  // Focus trap: keep Tab navigation inside the mobile menu while it's open
+  useEffect(() => {
+    if (!menuOpen || !menuRef.current) return;
+    const menu = menuRef.current;
+    const focusable = Array.from(
+      menu.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")
+    );
+    focusable[0]?.focus();
+
+    const onTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    menu.addEventListener("keydown", onTab);
+    return () => menu.removeEventListener("keydown", onTab);
+  }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -32,9 +72,10 @@ export default function Nav() {
       className={`
         fixed top-0 left-0 right-0 z-50
         transition-all duration-300
-        ${scrolled
-          ? "dark:bg-slate-900/95 bg-white/95 backdrop-blur-md shadow-lg shadow-black/5 border-b dark:border-slate-800/60 border-slate-200/80"
-          : "bg-transparent"
+        ${
+          scrolled
+            ? "dark:bg-slate-900/95 bg-white/95 backdrop-blur-md shadow-lg shadow-black/5 border-b dark:border-slate-800/60 border-slate-200/80"
+            : "bg-transparent"
         }
       `}
     >
@@ -54,16 +95,20 @@ export default function Nav() {
             flex items-center gap-2
           "
         >
-          <span className="
+          <span
+            className="
             w-8 h-8 rounded-lg
             bg-gradient-to-br from-brand to-accent
             flex items-center justify-center
             text-white text-xs font-bold
             shrink-0
-          ">
+          "
+          >
             JL
           </span>
-          <span className="hidden sm:inline dark:text-slate-400 text-slate-500">julien-lange.dev</span>
+          <span className="hidden sm:inline dark:text-slate-400 text-slate-500">
+            julienlange.dev
+          </span>
         </a>
 
         {/* Desktop links */}
@@ -103,7 +148,18 @@ export default function Nav() {
               border border-brand/50
             "
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
@@ -113,6 +169,7 @@ export default function Nav() {
 
           {/* Mobile hamburger */}
           <button
+            ref={hamburgerRef}
             aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -123,17 +180,25 @@ export default function Nav() {
               transition-colors
             "
           >
-            <span className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            <span
+              className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
+            />
+            <span
+              className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+            />
           </button>
         </div>
       </nav>
 
       {/* Mobile menu */}
       <div
+        ref={menuRef}
         id="mobile-menu"
         role="dialog"
+        aria-modal="true"
         aria-label="Menu de navigation"
         className={`
           lg:hidden overflow-hidden transition-all duration-300
@@ -164,7 +229,10 @@ export default function Nav() {
             <a
               href={siteConfig.cvPath}
               download
-              onClick={() => { track("cv_download"); closeMenu(); }}
+              onClick={() => {
+                track("cv_download");
+                closeMenu();
+              }}
               className="
                 flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium
                 text-accent dark:text-accent
@@ -172,7 +240,18 @@ export default function Nav() {
                 transition-colors
               "
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />

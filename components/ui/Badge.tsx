@@ -11,8 +11,7 @@ type BadgeProps = {
 const variantClasses: Record<BadgeVariant, string> = {
   default:
     "bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700",
-  accent:
-    "bg-brand/10 text-brand border border-brand/30 dark:text-accent dark:border-brand/30",
+  accent: "bg-brand/10 text-brand border border-brand/30 dark:text-accent dark:border-brand/30",
   outline:
     "bg-transparent text-slate-500 border border-slate-300 dark:text-slate-400 dark:border-slate-600",
 };
