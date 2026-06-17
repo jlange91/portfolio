@@ -1,0 +1,256 @@
+{
+  "skipLink": "Aller au contenu principal",
+  "themeToggle": {
+    "toDark": "Passer en mode sombre",
+    "toLight": "Passer en mode clair"
+  },
+  "langSwitcher": {
+    "switchTo": "English",
+    "ariaLabel": "Switch to English"
+  },
+  "nav": {
+    "ariaMain": "Navigation principale",
+    "ariaMenu": "Menu de navigation",
+    "ariaHome": "Julien Lange — Retour à l'accueil",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "cv": "Mon CV",
+    "cvDownload": "Télécharger mon CV",
+    "cvPath": "/CV_Julien_Lange.pdf",
+    "links": {
+      "accueil": "Accueil",
+      "experiences": "Expériences",
+      "competences": "Compétences",
+      "projets": "Projets",
+      "formation": "Formation",
+      "contact": "Contact"
+    }
+  },
+  "hero": {
+    "ariaSection": "Présentation",
+    "ariaPhoto": "Julien Lange, développeur JavaScript senior freelance",
+    "ariaGithub": "Profil GitHub de Julien Lange (ouvre dans un nouvel onglet)",
+    "ariaLinkedin": "Profil LinkedIn de Julien Lange (ouvre dans un nouvel onglet)",
+    "ariaKeyFigures": "Chiffres clés",
+    "role": "Développeur JavaScript Senior",
+    "subtitle": "Web Components, Design System & Fullstack",
+    "pitch": "Je construis des interfaces Web qui tiennent sur la durée. Pendant 5 ans chez Fnac Darty, j'ai appris qu'un bon composant n'est pas celui qui fonctionne — c'est celui que trois équipes différentes peuvent utiliser sans t'appeler.",
+    "location": "Île-de-France · Disponible",
+    "stats": {
+      "views": "vues/jour",
+      "markets": "marchés",
+      "components": "composants"
+    },
+    "cta": {
+      "cv": "Télécharger mon CV",
+      "contact": "Me contacter"
+    }
+  },
+  "experience": {
+    "sectionTitle": "Expériences",
+    "ariaTagsLabel": "Technologies utilisées",
+    "items": {
+      "fnac-darty": {
+        "role": "Développeur Front-End Senior",
+        "pitch": "Mission longue durée sur fnac.com, site e-commerce leader en France, sur les pages les plus visitées : fiche article, homepage, sous-homes, résultats de recherche (~100 000 vues/jour sur les résultats de recherche, ~50 000 sur la homepage). Stack : ASP.NET/Razor + JavaScript ES6+/Web Components on-prem, migration progressive vers une architecture cloud Azure (micro-frontends server-side).",
+        "highlights": {
+          "web-components-lib": {
+            "title": "Librairie de Web Components internes",
+            "description": "Création et maintenance d'une librairie NPM interne de 20 à 30 composants UI en Custom Elements natifs, consommée par 3 équipes front. Migration depuis une architecture de composants propriétaires vers la spec Web Components native. Création de packages partagés (design tokens SCSS, configs ESLint/Babel communes) — socle d'un Design System."
+          },
+          "migration-cloud": {
+            "title": "Migration cloud (M2C)",
+            "description": "Migration des strates Home/Sous-homes vers un framework MFE server-side (fragments UI, tag helpers Razor, pipeline Kafka/Cosmos DB), migration des templates Liquid vers CSHTML, migration CSS Less → SCSS."
+          },
+          "smile": {
+            "title": "Refonte de SMILE — CMS interne",
+            "description": "Conception des maquettes Figma en autonomie et refonte technique complète du front, déployé en production et utilisé par ~50 éditeurs sur 8 marchés (FR, BE-FR, BE-NL, CH-FR, CH-DE, ES, PT, Fnac Pro)."
+          },
+          "kamino": {
+            "title": "Kamino — Intégration publicitaire",
+            "description": "Intégration de 7 formats publicitaires on-site (vidéo, display, natif) desktop/mobile, avec tracking analytique complet."
+          },
+          "arrow": {
+            "title": "Arrow — Marketplace seller",
+            "description": "Intégration front des informations vendeur marketplace sur toutes les surfaces : fiche article, listes, mini-FA, buybox."
+          },
+          "autres": {
+            "title": "Autres chantiers",
+            "description": "Conformité DSA, optimisation WebPerf (Core Web Vitals), SEO technique, refonte fiche article 2→3 colonnes."
+          }
+        }
+      },
+      "42-lisboa": {
+        "role": "Ingénieur Système & Encadrant Pédagogique",
+        "imageAlt": "Julien Lange encadrant une piscine à la 42 Lisboa — étudiants sur iMacs dans l'open space",
+        "imageCaption": "42 Lisboa, 2020 — encadrement d'une piscine",
+        "pitch": "Recruté en tant qu'ancien élève pour l'ouverture de l'antenne de l'école 42 à Lisbonne. Rôle hybride : infrastructure technique et pédagogie. Environnement de travail entièrement en anglais.",
+        "highlights": {
+          "infra": {
+            "title": "Infrastructure & DevOps",
+            "description": "Mise en place de l'infrastructure (VMware, Ansible) : examens, moulinette de correction automatique, sessions LDAP sur iMacs. Maintenance des services, résolution d'incidents sur les sessions étudiants."
+          },
+          "ecommerce": {
+            "title": "Site e-commerce Next.js",
+            "description": "Développement d'un site e-commerce pour le merchandising de l'école : catalogue produits, authentification OAuth via l'API officielle de 42, gestion des commandes."
+          },
+          "pedagogie": {
+            "title": "Pédagogie",
+            "description": "Rôle pédagogique pendant les « piscines » de l'école : code review de projets en C, accompagnement des étudiants."
+          }
+        }
+      },
+      "xfab": {
+        "role": "Développeur C, Systèmes Industriels",
+        "imageAlt": "Salle blanche X-FAB — ingénieurs en combinaison stérile devant des équipements de fabrication de semi-conducteurs",
+        "imageCaption": "Environnement de fabrication X-FAB — industrie des semi-conducteurs",
+        "pitch": "Développement en C d'un programme de communication avec des machines industrielles via la norme SECS/GEM (industrie des semi-conducteurs), déclenchement d'actions et récupération de données de production.",
+        "highlights": {
+          "secsgem": {
+            "title": "Communication SECS/GEM",
+            "description": "Implémentation d'un programme de communication conforme à la norme SECS/GEM pour piloter et interroger des équipements de fabrication de semi-conducteurs."
+          }
+        }
+      },
+      "societe-generale": {
+        "role": "Développeur JS/Python, Lab Innovation",
+        "pitch": "Développement de l'interface web et des cas d'usage pour le robot Pepper (Softbank Robotics), mis en production dans les agences bancaires. Développement de microservices pour le projet Cognitive Services.",
+        "highlights": {
+          "pepper": {
+            "title": "Robot Pepper (Softbank Robotics)",
+            "description": "Interface web et cas d'usage pour le robot conversationnel Pepper, déployé en production dans les agences Société Générale."
+          },
+          "microservices": {
+            "title": "Microservices — Cognitive Services",
+            "description": "Développement de microservices REST pour le projet d'intelligence artificielle Cognitive Services."
+          }
+        }
+      }
+    },
+    "stats": {
+      "search": { "label": "vues / jour", "sub": "résultats de recherche" },
+      "home": { "label": "vues / jour", "sub": "homepage" },
+      "smile": { "label": "éditeurs", "sub": "utilisateurs SMILE" },
+      "markets": { "label": "marchés", "sub": "FR, BE, CH, ES, PT…" }
+    }
+  },
+  "skills": {
+    "sectionTitle": "Compétences",
+    "ariaChart": "Diagramme radar des compétences",
+    "ariaSkillsLabel": "Compétences : {name}",
+    "items": {
+      "frontend": { "name": "Front-end", "radarLabel": "Front-end" },
+      "frameworks": { "name": "Frameworks", "radarLabel": "Frameworks" },
+      "build": { "name": "Build & Tooling", "radarLabel": "Build" },
+      "architecture": { "name": "Architecture", "radarLabel": "Architecture" },
+      "backend": { "name": "Back-end & Langages", "radarLabel": "Back-end" },
+      "cloud": { "name": "Cloud & Infra", "radarLabel": "Cloud & Infra" },
+      "other": { "name": "Outils & Méthodes", "radarLabel": "Méthodes" }
+    }
+  },
+  "projects": {
+    "sectionTitle": "Projets clés",
+    "ariaTagsLabel": "Technologies",
+    "ariaGithubLink": "Voir {title} sur GitHub (ouvre dans un nouvel onglet)",
+    "items": {
+      "smile": {
+        "title": "SMILE — Refonte CMS interne",
+        "description": "Conception des maquettes Figma en autonomie et refonte technique complète du front d'un CMS interne. Déployé en production et utilisé quotidiennement par ~50 éditeurs de contenu sur 8 marchés (France, Belgique, Suisse, Espagne, Portugal, Fnac Pro)."
+      },
+      "web-components-lib": {
+        "title": "Librairie Web Components / Design System",
+        "description": "Création et maintenance d'une librairie NPM interne de 20 à 30 composants UI en Custom Elements natifs, consommée par 3 équipes front sur fnac.com. Packages partagés (design tokens SCSS, configs ESLint/Babel communes) constituant le socle d'un Design System."
+      },
+      "42-lisboa-ecommerce": {
+        "title": "Site e-commerce Next.js — 42 Lisboa",
+        "description": "Site de merchandising pour l'école 42 Lisboa : catalogue produits, authentification OAuth via l'API officielle de 42, gestion des commandes. Développé en autonomie, from scratch, déployé en production."
+      },
+      "robot-pepper": {
+        "title": "Robot Pepper — Interface web",
+        "description": "Interface web et cas d'usage pour le robot conversationnel Pepper de Softbank Robotics, développé au sein du Lab Innovation de la Société Générale et mis en production dans les agences bancaires."
+      }
+    }
+  },
+  "education": {
+    "sectionTitle": "Formation",
+    "degreesHeading": "Diplômes",
+    "certsHeading": "Formations continues & certifications",
+    "items": {
+      "42": {
+        "degree": "Architecte en technologie de l'information",
+        "description": "Formation intensive par projets et peer learning. Programmation C, C++, Shell scripting, algorithmie, Unix, réseaux, systèmes. Pédagogie sans cours magistraux, 100% pratique et collaborative."
+      },
+      "bac": {
+        "degree": "Baccalauréat STI2D",
+        "description": "Sciences et Technologies de l'Industrie et du Développement Durable, spécialité informatique et numérique."
+      },
+      "wcag": {
+        "degree": "Accessibilité web (WCAG / RGAA)",
+        "description": "Formation sur les référentiels WCAG 2.1 et RGAA 4.1 : critères d'accessibilité, tests avec lecteurs d'écran, audits techniques."
+      },
+      "ai-copilot": {
+        "degree": "IA & GitHub Copilot",
+        "description": "Utilisation de l'IA générative dans les workflows de développement : GitHub Copilot, prompt engineering, bonnes pratiques."
+      },
+      "azure": {
+        "degree": "Microsoft Azure Cloud",
+        "description": "Fondamentaux Azure : services cloud, architecture distribuée, Cosmos DB, Kafka, déploiement d'applications."
+      },
+      "design-thinker": {
+        "degree": "Design Thinker",
+        "description": "Méthodologie Design Thinking : empathie, idéation, prototypage, test utilisateur. Application sur des projets concrets."
+      }
+    }
+  },
+  "contact": {
+    "sectionTitle": "Contact",
+    "intro": "Disponible pour des missions freelance en Île-de-France ou en full remote. N'hésitez pas à me contacter pour discuter d'un projet ou d'une opportunité.",
+    "ariaEmail": "Envoyer un email à Julien Lange",
+    "ariaLinkedin": "Profil LinkedIn de Julien Lange (ouvre dans un nouvel onglet)",
+    "ariaGithub": "Profil GitHub de Julien Lange (ouvre dans un nouvel onglet)",
+    "emailFallback": "Ou directement par",
+    "emailFallbackLink": "email",
+    "form": {
+      "ariaLabel": "Formulaire de contact",
+      "name": { "label": "Nom", "placeholder": "Votre nom" },
+      "email": { "label": "Email", "placeholder": "votre@email.com" },
+      "message": { "label": "Message", "placeholder": "Décrivez votre projet ou votre besoin…" },
+      "submit": "Envoyer le message",
+      "submitting": "Envoi en cours…"
+    },
+    "success": {
+      "title": "Message envoyé !",
+      "body": "Je vous répondrai dans les meilleurs délais.",
+      "again": "Envoyer un autre message"
+    },
+    "fallback": {
+      "title": "Une dernière étape",
+      "body": "Le formulaire n'est pas encore configuré. Cliquez ci-dessous pour ouvrir votre client mail avec votre message pré-rempli.",
+      "cta": "Ouvrir le client mail",
+      "back": "Retour au formulaire"
+    },
+    "errors": {
+      "rate_limited": "Trop de tentatives. Réessayez dans une heure.",
+      "invalid_body": "Corps de requête invalide.",
+      "validation": "Données invalides.",
+      "send_failed": "L'envoi a échoué. Réessayez ou contactez par email.",
+      "network": "Impossible de contacter le serveur.",
+      "unknown": "Une erreur est survenue."
+    }
+  },
+  "footer": {
+    "built": "Construit avec Next.js · Déployé sur Vercel",
+    "ariaGithub": "GitHub de Julien Lange (ouvre dans un nouvel onglet)",
+    "ariaLinkedin": "LinkedIn de Julien Lange (ouvre dans un nouvel onglet)",
+    "ariaEmail": "Email de Julien Lange"
+  },
+  "site": {
+    "title": "Julien Lange — Développeur JavaScript Senior | Web Components, Design System, Fullstack",
+    "description": "Développeur web senior freelance, ~5 ans chez Fnac Darty sur des pages à 100 000+ visites/jour. Spécialisé Web Components, Design Systems et architecture micro-frontends. En transition vers des missions fullstack (Next.js, Node.js, Python).",
+    "jobTitle": "Développeur JavaScript Senior — Web Components, Design System & Fullstack",
+    "keywords": ["Julien Lange", "développeur JavaScript", "freelance", "Web Components", "Design System", "Next.js", "Fnac Darty", "Île-de-France", "fullstack", "micro-frontends"],
+    "ogTitle": "Julien Lange — Senior JavaScript Developer",
+    "tagline": "Développeur JavaScript Senior",
+    "subtitle": "Web Components · Design System · Fullstack · Freelance"
+  }
+}

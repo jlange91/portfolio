@@ -1,0 +1,256 @@
+{
+  "skipLink": "Skip to main content",
+  "themeToggle": {
+    "toDark": "Switch to dark mode",
+    "toLight": "Switch to light mode"
+  },
+  "langSwitcher": {
+    "switchTo": "Français",
+    "ariaLabel": "Passer en français"
+  },
+  "nav": {
+    "ariaMain": "Main navigation",
+    "ariaMenu": "Navigation menu",
+    "ariaHome": "Julien Lange — Back to top",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "cv": "My CV",
+    "cvDownload": "Download my CV",
+    "cvPath": "/CV_Julien_Lange_EN.pdf",
+    "links": {
+      "accueil": "Home",
+      "experiences": "Experience",
+      "competences": "Skills",
+      "projets": "Projects",
+      "formation": "Education",
+      "contact": "Contact"
+    }
+  },
+  "hero": {
+    "ariaSection": "Introduction",
+    "ariaPhoto": "Julien Lange, senior JavaScript developer freelance",
+    "ariaGithub": "Julien Lange's GitHub profile (opens in a new tab)",
+    "ariaLinkedin": "Julien Lange's LinkedIn profile (opens in a new tab)",
+    "ariaKeyFigures": "Key figures",
+    "role": "Senior JavaScript Developer",
+    "subtitle": "Web Components, Design System & Fullstack",
+    "pitch": "I build Web interfaces that stand the test of time. During 5 years at Fnac Darty, I learned that a good component isn't one that works — it's one that three different teams can use without calling you.",
+    "location": "Île-de-France · Available",
+    "stats": {
+      "views": "views/day",
+      "markets": "markets",
+      "components": "components"
+    },
+    "cta": {
+      "cv": "Download my CV",
+      "contact": "Contact me"
+    }
+  },
+  "experience": {
+    "sectionTitle": "Experience",
+    "ariaTagsLabel": "Technologies used",
+    "items": {
+      "fnac-darty": {
+        "role": "Senior Front-End Developer",
+        "pitch": "Long-term mission on fnac.com, France's leading e-commerce site, on the most visited pages: product pages, homepage, sub-homes, search results (~100,000 views/day on search results, ~50,000 on homepage). Stack: ASP.NET/Razor + JavaScript ES6+/Web Components on-prem, progressive migration to a cloud Azure architecture (server-side micro-frontends).",
+        "highlights": {
+          "web-components-lib": {
+            "title": "Internal Web Components Library",
+            "description": "Creation and maintenance of an internal NPM library of 20 to 30 UI components in native Custom Elements, consumed by 3 front-end teams. Migration from a proprietary component architecture to the native Web Components spec. Creation of shared packages (SCSS design tokens, common ESLint/Babel configs) — the foundation of a Design System."
+          },
+          "migration-cloud": {
+            "title": "Cloud Migration (M2C)",
+            "description": "Migration of Home/Sub-home layers to a server-side MFE framework (UI fragments, Razor tag helpers, Kafka/Cosmos DB pipeline), migration of Liquid templates to CSHTML, CSS Less → SCSS migration."
+          },
+          "smile": {
+            "title": "SMILE CMS Redesign",
+            "description": "Autonomous Figma mockup design and complete technical front-end overhaul, deployed in production and used by ~50 editors across 8 markets (FR, BE-FR, BE-NL, CH-FR, CH-DE, ES, PT, Fnac Pro)."
+          },
+          "kamino": {
+            "title": "Kamino — Ad Integration",
+            "description": "Integration of 7 on-site ad formats (video, display, native) desktop/mobile, with complete analytics tracking."
+          },
+          "arrow": {
+            "title": "Arrow — Marketplace Seller",
+            "description": "Front-end integration of marketplace seller information across all surfaces: product pages, listings, mini-product page, buybox."
+          },
+          "autres": {
+            "title": "Other projects",
+            "description": "DSA compliance, WebPerf optimization (Core Web Vitals), technical SEO, product page redesign from 2 to 3 columns."
+          }
+        }
+      },
+      "42-lisboa": {
+        "role": "System Engineer & Pedagogical Supervisor",
+        "imageAlt": "Julien Lange supervising a piscine at 42 Lisboa — students on iMacs in the open space",
+        "imageCaption": "42 Lisboa, 2020 — supervising a piscine",
+        "pitch": "Recruited as an alumnus for the opening of the 42 school campus in Lisbon. Hybrid role: technical infrastructure and pedagogy. Fully English-speaking work environment.",
+        "highlights": {
+          "infra": {
+            "title": "Infrastructure & DevOps",
+            "description": "Setting up the infrastructure (VMware, Ansible): exams, automated grading system, LDAP sessions on iMacs. Service maintenance, incident resolution for student sessions."
+          },
+          "ecommerce": {
+            "title": "Next.js E-commerce Site",
+            "description": "Development of an e-commerce site for the school's merchandising: product catalog, OAuth authentication via the official 42 API, order management."
+          },
+          "pedagogie": {
+            "title": "Pedagogy",
+            "description": "Pedagogical role during school 'piscines': code review of C projects, student mentoring."
+          }
+        }
+      },
+      "xfab": {
+        "role": "C Developer, Industrial Systems",
+        "imageAlt": "X-FAB clean room — engineers in sterile suits in front of semiconductor manufacturing equipment",
+        "imageCaption": "X-FAB manufacturing environment — semiconductor industry",
+        "pitch": "C development of a communication program with industrial machines via the SECS/GEM standard (semiconductor industry), triggering actions and retrieving production data.",
+        "highlights": {
+          "secsgem": {
+            "title": "SECS/GEM Communication",
+            "description": "Implementation of a SECS/GEM-compliant communication program to control and query semiconductor manufacturing equipment."
+          }
+        }
+      },
+      "societe-generale": {
+        "role": "JS/Python Developer, Innovation Lab",
+        "pitch": "Development of the web interface and use cases for the Pepper robot (Softbank Robotics), deployed in production in bank branches. Development of microservices for the Cognitive Services project.",
+        "highlights": {
+          "pepper": {
+            "title": "Pepper Robot (Softbank Robotics)",
+            "description": "Web interface and use cases for the Pepper conversational robot, deployed in production in Société Générale branches."
+          },
+          "microservices": {
+            "title": "Microservices — Cognitive Services",
+            "description": "Development of REST microservices for the Cognitive Services artificial intelligence project."
+          }
+        }
+      }
+    },
+    "stats": {
+      "search": { "label": "views / day", "sub": "search results" },
+      "home": { "label": "views / day", "sub": "homepage" },
+      "smile": { "label": "editors", "sub": "SMILE users" },
+      "markets": { "label": "markets", "sub": "FR, BE, CH, ES, PT…" }
+    }
+  },
+  "skills": {
+    "sectionTitle": "Skills",
+    "ariaChart": "Radar chart of skills",
+    "ariaSkillsLabel": "Skills: {name}",
+    "items": {
+      "frontend": { "name": "Front-end", "radarLabel": "Front-end" },
+      "frameworks": { "name": "Frameworks", "radarLabel": "Frameworks" },
+      "build": { "name": "Build & Tooling", "radarLabel": "Build" },
+      "architecture": { "name": "Architecture", "radarLabel": "Architecture" },
+      "backend": { "name": "Back-end & Languages", "radarLabel": "Back-end" },
+      "cloud": { "name": "Cloud & Infra", "radarLabel": "Cloud & Infra" },
+      "other": { "name": "Tools & Methods", "radarLabel": "Methods" }
+    }
+  },
+  "projects": {
+    "sectionTitle": "Key Projects",
+    "ariaTagsLabel": "Technologies",
+    "ariaGithubLink": "View {title} on GitHub (opens in a new tab)",
+    "items": {
+      "smile": {
+        "title": "SMILE — Internal CMS Redesign",
+        "description": "Autonomous Figma mockup design and complete technical front-end overhaul of an internal CMS. Deployed in production and used daily by ~50 content editors across 8 markets (France, Belgium, Switzerland, Spain, Portugal, Fnac Pro)."
+      },
+      "web-components-lib": {
+        "title": "Web Components Library / Design System",
+        "description": "Creation and maintenance of an internal NPM library of 20 to 30 UI components in native Custom Elements, consumed by 3 front-end teams on fnac.com. Shared packages (SCSS design tokens, common ESLint/Babel configs) forming the foundation of a Design System."
+      },
+      "42-lisboa-ecommerce": {
+        "title": "Next.js E-commerce — 42 Lisboa",
+        "description": "Merchandising site for 42 Lisboa school: product catalog, OAuth authentication via the official 42 API, order management. Built independently from scratch, deployed in production."
+      },
+      "robot-pepper": {
+        "title": "Pepper Robot — Web Interface",
+        "description": "Web interface and use cases for the Pepper conversational robot by Softbank Robotics, developed within Société Générale's Innovation Lab and deployed in production in bank branches."
+      }
+    }
+  },
+  "education": {
+    "sectionTitle": "Education",
+    "degreesHeading": "Degrees",
+    "certsHeading": "Continuing education & certifications",
+    "items": {
+      "42": {
+        "degree": "Information Technology Architect",
+        "description": "Intensive project-based learning and peer review. C, C++, Shell scripting, algorithms, Unix, networking, systems. No lectures — 100% hands-on and collaborative."
+      },
+      "bac": {
+        "degree": "STI2D Baccalaureate",
+        "description": "Science and Technology of Industry and Sustainable Development, specializing in computing and digital technology."
+      },
+      "wcag": {
+        "degree": "Web Accessibility (WCAG / RGAA)",
+        "description": "Training on WCAG 2.1 and RGAA 4.1 standards: accessibility criteria, screen reader testing, technical audits."
+      },
+      "ai-copilot": {
+        "degree": "AI & GitHub Copilot",
+        "description": "Using generative AI in development workflows: GitHub Copilot, prompt engineering, best practices."
+      },
+      "azure": {
+        "degree": "Microsoft Azure Cloud",
+        "description": "Azure fundamentals: cloud services, distributed architecture, Cosmos DB, Kafka, application deployment."
+      },
+      "design-thinker": {
+        "degree": "Design Thinker",
+        "description": "Design Thinking methodology: empathy, ideation, prototyping, user testing. Applied to concrete projects."
+      }
+    }
+  },
+  "contact": {
+    "sectionTitle": "Contact",
+    "intro": "Available for freelance missions in Île-de-France or fully remote. Feel free to reach out to discuss a project or opportunity.",
+    "ariaEmail": "Send an email to Julien Lange",
+    "ariaLinkedin": "Julien Lange's LinkedIn profile (opens in a new tab)",
+    "ariaGithub": "Julien Lange's GitHub profile (opens in a new tab)",
+    "emailFallback": "Or directly by",
+    "emailFallbackLink": "email",
+    "form": {
+      "ariaLabel": "Contact form",
+      "name": { "label": "Name", "placeholder": "Your name" },
+      "email": { "label": "Email", "placeholder": "your@email.com" },
+      "message": { "label": "Message", "placeholder": "Describe your project or need…" },
+      "submit": "Send message",
+      "submitting": "Sending…"
+    },
+    "success": {
+      "title": "Message sent!",
+      "body": "I'll get back to you as soon as possible.",
+      "again": "Send another message"
+    },
+    "fallback": {
+      "title": "One last step",
+      "body": "The form isn't configured yet. Click below to open your email client with your message pre-filled.",
+      "cta": "Open email client",
+      "back": "Back to form"
+    },
+    "errors": {
+      "rate_limited": "Too many attempts. Please try again in an hour.",
+      "invalid_body": "Invalid request body.",
+      "validation": "Invalid data.",
+      "send_failed": "Sending failed. Please try again or contact by email.",
+      "network": "Unable to reach the server.",
+      "unknown": "An error occurred."
+    }
+  },
+  "footer": {
+    "built": "Built with Next.js · Deployed on Vercel",
+    "ariaGithub": "Julien Lange's GitHub (opens in a new tab)",
+    "ariaLinkedin": "Julien Lange's LinkedIn (opens in a new tab)",
+    "ariaEmail": "Julien Lange's email"
+  },
+  "site": {
+    "title": "Julien Lange — Senior JavaScript Developer | Web Components, Design System, Fullstack",
+    "description": "Senior freelance web developer, ~5 years at Fnac Darty on pages with 100,000+ visits/day. Specialized in Web Components, Design Systems and micro-frontend architecture. Transitioning to fullstack missions (Next.js, Node.js, Python).",
+    "jobTitle": "Senior JavaScript Developer — Web Components, Design System & Fullstack",
+    "keywords": ["Julien Lange", "JavaScript developer", "freelance", "Web Components", "Design System", "Next.js", "Fnac Darty", "Île-de-France", "fullstack", "micro-frontends"],
+    "ogTitle": "Julien Lange — Senior JavaScript Developer",
+    "tagline": "Senior JavaScript Developer",
+    "subtitle": "Web Components · Design System · Fullstack · Freelance"
+  }
+}

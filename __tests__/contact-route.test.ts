@@ -33,7 +33,7 @@ describe("POST /api/contact", () => {
     const res = await POST(makeReq({ email: "a@b.com", message: "Hello" }));
     const body = await res.json();
     expect(res.status).toBe(400);
-    expect(body.error).toMatch(/requis|invalide/i);
+    expect(body.error).toBe("validation");
   });
 
   it("returns 400 for invalid email", async () => {
@@ -41,7 +41,7 @@ describe("POST /api/contact", () => {
     const res = await POST(makeReq({ name: "Jules", email: "not-an-email", message: "Hello" }));
     const body = await res.json();
     expect(res.status).toBe(400);
-    expect(body.error).toMatch(/email/i);
+    expect(body.error).toBe("validation");
   });
 
   it("returns 400 when message exceeds 5000 characters", async () => {
@@ -49,7 +49,7 @@ describe("POST /api/contact", () => {
     const res = await POST(makeReq({ name: "Jules", email: "a@b.com", message: "x".repeat(5001) }));
     const body = await res.json();
     expect(res.status).toBe(400);
-    expect(body.error).toMatch(/trop long|5000/i);
+    expect(body.error).toBe("validation");
   });
 
   it("returns 200 with valid payload", async () => {
