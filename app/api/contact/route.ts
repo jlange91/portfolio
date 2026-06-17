@@ -1,20 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-const stringRequired = (label: string) => z.string({ error: () => `${label} est requis` }).trim();
-
 const ContactSchema = z.object({
-  name: stringRequired("Le nom").min(1, "Le nom est requis").max(100),
-  email: stringRequired("L'email").email("Adresse email invalide"),
-  message: stringRequired("Le message")
-    .min(1, "Le message est requis")
-    .max(5000, "Message trop long (max 5000 caractères)"),
+  name: z.string().trim().min(1).max(100),
+  email: z.string().trim().email(),
+  message: z.string().trim().min(1).max(5000),
 });
 
-// In-memory rate limiter — best-effort in serverless (resets on cold start)
 const requestLog = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT = 5;
-const WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const WINDOW_MS = 60 * 60 * 1000;
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
@@ -41,23 +36,19 @@ function getClientIp(req: NextRequest): string {
 
 export async function POST(req: NextRequest) {
   if (isRateLimited(getClientIp(req))) {
-    return NextResponse.json(
-      { error: "Trop de tentatives. Réessayez dans une heure." },
-      { status: 429 }
-    );
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   }
 
   let raw: unknown;
   try {
     raw = await req.json();
   } catch {
-    return NextResponse.json({ error: "Corps de requête invalide" }, { status: 400 });
+    return NextResponse.json({ error: "invalid_body" }, { status: 400 });
   }
 
   const result = ContactSchema.safeParse(raw);
   if (!result.success) {
-    const firstError = result.error.issues[0]?.message ?? "Données invalides";
-    return NextResponse.json({ error: firstError }, { status: 400 });
+    return NextResponse.json({ error: "validation" }, { status: 400 });
   }
 
   const { name, email, message } = result.data;
@@ -80,10 +71,7 @@ export async function POST(req: NextRequest) {
 
   if (error) {
     console.error("Resend error:", error);
-    return NextResponse.json(
-      { error: "L'envoi a échoué. Réessayez ou contactez par email." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "send_failed" }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });

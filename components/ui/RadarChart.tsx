@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useInView } from "framer-motion";
 
 type RadarPoint = {
   label: string;
@@ -9,6 +10,7 @@ type RadarPoint = {
 
 type Props = {
   points: RadarPoint[];
+  ariaLabel: string;
   className?: string;
 };
 
@@ -32,8 +34,10 @@ function toPoints(pts: { x: number; y: number }[]) {
   return pts.map((p) => `${p.x.toFixed(2)},${p.y.toFixed(2)}`).join(" ");
 }
 
-export default function RadarChart({ points, className = "" }: Props) {
+export default function RadarChart({ points, ariaLabel, className = "" }: Props) {
   const shouldReduce = useReducedMotion();
+  const svgRef = useRef<SVGSVGElement>(null);
+  const isInView = useInView(svgRef, { once: true });
   const n = points.length;
 
   const dataPolygon = toPoints(points.map((p, i) => polar(i, n, (p.value / 100) * MAX_R)));
@@ -41,19 +45,20 @@ export default function RadarChart({ points, className = "" }: Props) {
   const ringPolygon = (pct: number) =>
     toPoints(Array.from({ length: n }, (_, i) => polar(i, n, (pct / 100) * MAX_R)));
 
+  const visible = shouldReduce || isInView;
+
   return (
     <svg
+      ref={svgRef}
       viewBox={`-16 -16 ${SIZE + 32} ${SIZE + 32}`}
       className={`w-full ${className}`}
       role="img"
-      aria-label="Diagramme radar des compétences"
+      aria-label={ariaLabel}
     >
-      {/* Grid rings */}
       {RINGS.map((r) => (
         <polygon key={r} points={ringPolygon(r)} fill="none" stroke="#334155" strokeWidth={0.75} />
       ))}
 
-      {/* Ring labels (%) */}
       {RINGS.map((r) => {
         const p = polar(0, n, (r / 100) * MAX_R);
         return (
@@ -71,7 +76,6 @@ export default function RadarChart({ points, className = "" }: Props) {
         );
       })}
 
-      {/* Axis lines */}
       {points.map((_, i) => {
         const end = polar(i, n, MAX_R);
         return (
@@ -79,33 +83,26 @@ export default function RadarChart({ points, className = "" }: Props) {
         );
       })}
 
-      {/* Data fill */}
       <motion.polygon
         points={dataPolygon}
         fill="rgba(56,189,248,0.10)"
         stroke="none"
-        initial={!shouldReduce ? { scale: 0 } : false}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true }}
+        animate={{ opacity: visible ? 1 : 0 }}
+        initial={{ opacity: 0 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        style={{ transformOrigin: `${CX}px ${CY}px` }}
       />
 
-      {/* Data stroke */}
       <motion.polygon
         points={dataPolygon}
         fill="none"
         stroke="#38bdf8"
         strokeWidth={2}
         strokeLinejoin="round"
-        initial={!shouldReduce ? { scale: 0 } : false}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true }}
+        animate={{ opacity: visible ? 1 : 0 }}
+        initial={{ opacity: 0 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        style={{ transformOrigin: `${CX}px ${CY}px` }}
       />
 
-      {/* Data points */}
       {points.map((p, i) => {
         const pt = polar(i, n, (p.value / 100) * MAX_R);
         return (
@@ -117,16 +114,13 @@ export default function RadarChart({ points, className = "" }: Props) {
             fill="#38bdf8"
             stroke="#0f172a"
             strokeWidth={1.5}
-            initial={!shouldReduce ? { opacity: 0, scale: 0 } : false}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            animate={{ opacity: visible ? 1 : 0 }}
+            initial={{ opacity: 0 }}
             transition={{ delay: 0.65 + i * 0.07, duration: 0.25 }}
-            style={{ transformOrigin: `${pt.x}px ${pt.y}px` }}
           />
         );
       })}
 
-      {/* Axis labels */}
       {points.map((p, i) => {
         const lp = polar(i, n, LABEL_R);
         const a = angle(i, n);

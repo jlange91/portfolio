@@ -1,4 +1,7 @@
-export default function SkipLink() {
+import { getTranslations } from "next-intl/server";
+
+export default async function SkipLink() {
+  const t = await getTranslations();
   return (
     <a
       href="#main-content"
@@ -11,7 +14,7 @@ export default function SkipLink() {
         focus:outline-none focus:ring-2 focus:ring-white
       "
     >
-      Aller au contenu principal
+      {t("skipLink")}
     </a>
   );
 }

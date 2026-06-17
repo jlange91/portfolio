@@ -14,27 +14,26 @@ const points = [
 
 describe("RadarChart", () => {
   it("renders an SVG element", () => {
-    const { container } = render(<RadarChart points={points} />);
+    const { container } = render(<RadarChart points={points} ariaLabel="Radar chart" />);
     expect(container.querySelector("svg")).toBeTruthy();
   });
 
   it("renders one label per data point", () => {
-    const { getAllByText } = render(<RadarChart points={points} />);
+    const { getAllByText } = render(<RadarChart points={points} ariaLabel="Radar chart" />);
     for (const p of points) {
       expect(getAllByText(p.label).length).toBeGreaterThan(0);
     }
   });
 
   it("renders the correct number of axis lines", () => {
-    const { container } = render(<RadarChart points={points} />);
-    // One line per axis
+    const { container } = render(<RadarChart points={points} ariaLabel="Radar chart" />);
     const lines = container.querySelectorAll("line");
     expect(lines.length).toBe(points.length);
   });
 
   it("has accessible aria-label", () => {
-    const { container } = render(<RadarChart points={points} />);
+    const { container } = render(<RadarChart points={points} ariaLabel="Radar chart" />);
     const svg = container.querySelector("svg");
-    expect(svg?.getAttribute("aria-label")).toBeTruthy();
+    expect(svg?.getAttribute("aria-label")).toBe("Radar chart");
   });
 });

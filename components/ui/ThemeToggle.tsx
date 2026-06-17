@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function ThemeToggle() {
+  const t = useTranslations("themeToggle");
   const [isDark, setIsDark] = useState(true);
   const [mounted, setMounted] = useState(false);
 
@@ -29,11 +31,13 @@ export default function ThemeToggle() {
     );
   }
 
+  const label = isDark ? t("toLight") : t("toDark");
+
   return (
     <button
       onClick={toggle}
-      aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
-      title={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
+      aria-label={label}
+      title={label}
       className="
         w-9 h-9 flex items-center justify-center rounded-lg
         dark:bg-slate-800 bg-slate-100
@@ -44,7 +48,6 @@ export default function ThemeToggle() {
       "
     >
       {isDark ? (
-        /* Sun icon */
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -68,7 +71,6 @@ export default function ThemeToggle() {
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
         </svg>
       ) : (
-        /* Moon icon */
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"

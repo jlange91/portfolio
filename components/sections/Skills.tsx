@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import Section from "@/components/ui/Section";
 import Badge from "@/components/ui/Badge";
 import RadarChart from "@/components/ui/RadarChart";
@@ -17,16 +18,16 @@ const categoryIcons: Record<string, string> = {
 };
 
 export default function Skills() {
+  const t = useTranslations("skills");
   const shouldReduce = useReducedMotion();
 
   const radarPoints = skillCategories.map((c) => ({
-    label: c.radarLabel,
+    label: t(`items.${c.id}.radarLabel`),
     value: c.level,
   }));
 
   return (
-    <Section id="competences" number="02" title="Compétences">
-      {/* Radar */}
+    <Section id="competences" number="02" title={t("sectionTitle")}>
       <div className="flex justify-center mb-10">
         <motion.div
           initial={{ opacity: 0, y: shouldReduce ? 0 : 20 }}
@@ -40,11 +41,10 @@ export default function Skills() {
             border dark:border-slate-700/60 border-slate-200
           "
         >
-          <RadarChart points={radarPoints} />
+          <RadarChart points={radarPoints} ariaLabel={t("ariaChart")} />
         </motion.div>
       </div>
 
-      {/* Skill cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {skillCategories.map((category, index) => (
           <motion.div
@@ -65,13 +65,12 @@ export default function Skills() {
                   {categoryIcons[category.id] ?? "◆"}
                 </span>
                 <h3 className="text-sm font-semibold dark:text-slate-200 text-slate-800 tracking-wide">
-                  {category.name}
+                  {t(`items.${category.id}.name`)}
                 </h3>
               </div>
               <span className="font-mono text-xs text-accent tabular-nums">{category.level}%</span>
             </div>
 
-            {/* Level bar */}
             <div
               className="h-0.5 rounded-full dark:bg-slate-700 bg-slate-200 mb-4 overflow-hidden"
               aria-hidden="true"
@@ -88,7 +87,7 @@ export default function Skills() {
             <ul
               role="list"
               className="flex flex-wrap gap-2"
-              aria-label={`Compétences : ${category.name}`}
+              aria-label={t("ariaSkillsLabel", { name: t(`items.${category.id}.name`) })}
             >
               {category.skills.map((skill) => (
                 <li key={skill}>

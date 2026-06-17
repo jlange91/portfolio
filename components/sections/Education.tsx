@@ -1,20 +1,21 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import Section from "@/components/ui/Section";
 import { educationItems } from "@/lib/data/education";
 
 export default function Education() {
+  const t = useTranslations("education");
   const shouldReduce = useReducedMotion();
   const degrees = educationItems.filter((e) => e.type === "degree");
   const certs = educationItems.filter((e) => e.type === "certification");
 
   return (
-    <Section id="formation" number="04" title="Formation">
-      {/* Diplômes */}
+    <Section id="formation" number="04" title={t("sectionTitle")}>
       <div className="mb-10">
         <h3 className="font-mono text-xs text-accent tracking-widest uppercase mb-5 flex items-center gap-2">
-          <span aria-hidden="true">◈</span> Diplômes
+          <span aria-hidden="true">◈</span> {t("degreesHeading")}
         </h3>
         <div className="grid gap-4 sm:grid-cols-2">
           {degrees.map((item, index) => (
@@ -38,19 +39,20 @@ export default function Education() {
                   {item.period}
                 </span>
               </div>
-              <p className="text-sm font-medium dark:text-accent text-brand mb-2">{item.degree}</p>
+              <p className="text-sm font-medium dark:text-accent text-brand mb-2">
+                {t(`items.${item.id}.degree`)}
+              </p>
               <p className="text-xs dark:text-slate-400 text-slate-600 leading-relaxed">
-                {item.description}
+                {t(`items.${item.id}.description`)}
               </p>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Formations continues */}
       <div>
         <h3 className="font-mono text-xs text-accent tracking-widest uppercase mb-5 flex items-center gap-2">
-          <span aria-hidden="true">◎</span> Formations continues & certifications
+          <span aria-hidden="true">◎</span> {t("certsHeading")}
         </h3>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {certs.map((item, index) => (
@@ -72,13 +74,13 @@ export default function Education() {
                 </span>
               </div>
               <p className="text-sm font-semibold dark:text-slate-200 text-slate-800 mb-1">
-                {item.degree}
+                {t(`items.${item.id}.degree`)}
               </p>
               <p className="font-mono text-xs dark:text-slate-500 text-slate-500 mb-2">
                 {item.institution}
               </p>
               <p className="text-xs dark:text-slate-400 text-slate-600 leading-relaxed">
-                {item.description}
+                {t(`items.${item.id}.description`)}
               </p>
             </motion.div>
           ))}
