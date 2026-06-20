@@ -238,6 +238,9 @@
       "unknown": "An error occurred."
     }
   },
+  "merci": {
+    "backToSite": "Back to portfolio"
+  },
   "footer": {
     "built": "Built with Next.js · Deployed on Vercel",
     "ariaGithub": "Julien Lange's GitHub (opens in a new tab)",
@@ -248,7 +251,18 @@
     "title": "Julien Lange — Senior JavaScript Developer | Web Components, Design System, Fullstack",
     "description": "Senior freelance web developer, ~5 years at Fnac Darty on pages with 100,000+ visits/day. Specialized in Web Components, Design Systems and micro-frontend architecture. Transitioning to fullstack missions (Next.js, Node.js, Python).",
     "jobTitle": "Senior JavaScript Developer — Web Components, Design System & Fullstack",
-    "keywords": ["Julien Lange", "JavaScript developer", "freelance", "Web Components", "Design System", "Next.js", "Fnac Darty", "Île-de-France", "fullstack", "micro-frontends"],
+    "keywords": [
+      "Julien Lange",
+      "JavaScript developer",
+      "freelance",
+      "Web Components",
+      "Design System",
+      "Next.js",
+      "Fnac Darty",
+      "Île-de-France",
+      "fullstack",
+      "micro-frontends"
+    ],
     "ogTitle": "Julien Lange — Senior JavaScript Developer",
     "tagline": "Senior JavaScript Developer",
     "subtitle": "Web Components · Design System · Fullstack · Freelance"

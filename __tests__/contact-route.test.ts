@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { NextRequest } from "next/server";
 
 // Mock resend to avoid real network calls — must be registered before the route is imported
 vi.mock("resend", () => ({
@@ -12,7 +13,6 @@ vi.mock("resend", () => ({
 process.env.RESEND_API_KEY = "test-key";
 
 function makeReq(body: unknown, ip = "127.0.0.1") {
-  const { NextRequest } = require("next/server");
   return new NextRequest("http://localhost/api/contact", {
     method: "POST",
     body: JSON.stringify(body),

@@ -123,7 +123,18 @@ export default function Nav() {
             onClick={() => track("cv_download")}
             className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium bg-brand hover:bg-brand/90 text-white transition-colors duration-200 border border-brand/50 ml-1"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
@@ -139,9 +150,15 @@ export default function Nav() {
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-lg dark:hover:bg-slate-800 hover:bg-slate-100 transition-colors"
           >
-            <span className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            <span
+              className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
+            />
+            <span
+              className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`w-5 h-0.5 dark:bg-slate-300 bg-slate-600 transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+            />
           </button>
         </div>
       </nav>
@@ -168,10 +185,24 @@ export default function Nav() {
             <a
               href={t("cvPath")}
               download
-              onClick={() => { track("cv_download"); closeMenu(); }}
+              onClick={() => {
+                track("cv_download");
+                closeMenu();
+              }}
               className="flex items-center gap-2 px-3 py-2.5 rounded-md text-sm font-medium text-accent dark:text-accent dark:hover:bg-slate-800 hover:bg-slate-100 transition-colors"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />

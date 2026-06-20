@@ -138,3 +138,27 @@ html:not(.dark) body {
     transform: none;
   }
 }
+
+/* ─── No-JavaScript styles ─────────────────────────────────────────────── */
+/* 'no-js' is set on <html> by default; the inline themeScript removes it   */
+/* immediately if JS runs — so these rules only apply without JavaScript.   */
+
+.no-js [style*="opacity"] {
+  opacity: 1 !important;
+}
+.no-js [style*="transform"] {
+  transform: none !important;
+}
+.no-js .theme-toggle-btn {
+  display: none !important;
+}
+.no-js [aria-controls="mobile-menu"] {
+  display: none !important;
+}
+.no-js header[role="banner"] {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.6) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+}
