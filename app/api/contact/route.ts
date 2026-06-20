@@ -1,21 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { CONTACT_LIMITS } from "@/lib/data/contact";
 
 const ContactSchema = z.object({
-  name: z.string().trim().min(1).max(100),
-  email: z.string().trim().email(),
-  message: z.string().trim().min(1).max(5000),
+  name:    z.string().trim().min(1).max(CONTACT_LIMITS.name.max),
+  email:   z.string().trim().email(),
+  message: z.string().trim().min(1).max(CONTACT_LIMITS.message.max),
 });
 
 const requestLog = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT = 5;
 const WINDOW_MS = 60 * 60 * 1000;
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
-  const entry = requestLog.get(ip);
+  // Prune stale entries on each call to prevent unbounded Map growth
+  for (const [key, entry] of requestLog) {
+    if (now > entry.resetAt) requestLog.delete(key);
+  }
 
-  if (!entry || now > entry.resetAt) {
+  const entry = requestLog.get(ip);
+  if (!entry) {
     requestLog.set(ip, { count: 1, resetAt: now + WINDOW_MS });
     return false;
   }
@@ -35,6 +49,11 @@ function getClientIp(req: NextRequest): string {
 }
 
 export async function POST(req: NextRequest) {
+  // Check API key first: no key → fallback mailto, no rate limit consumed
+  if (!process.env.RESEND_API_KEY) {
+    return NextResponse.json({ fallback: true }, { status: 200 });
+  }
+
   if (isRateLimited(getClientIp(req))) {
     return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   }
@@ -53,10 +72,6 @@ export async function POST(req: NextRequest) {
 
   const { name, email, message } = result.data;
 
-  if (!process.env.RESEND_API_KEY) {
-    return NextResponse.json({ fallback: true }, { status: 200 });
-  }
-
   const { Resend } = await import("resend");
   const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -66,7 +81,7 @@ export async function POST(req: NextRequest) {
     replyTo: email,
     subject: `[Portfolio] Message de ${name}`,
     text: `De : ${name} <${email}>\n\n${message}`,
-    html: `<p><strong>De :</strong> ${name} &lt;${email}&gt;</p><p>${message.replace(/\n/g, "<br>")}</p>`,
+    html: `<p><strong>De :</strong> ${escapeHtml(name)} &lt;${email}&gt;</p><p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>`,
   });
 
   if (error) {
