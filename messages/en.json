@@ -31,16 +31,10 @@
     "ariaPhoto": "Julien Lange, senior JavaScript developer freelance",
     "ariaGithub": "Julien Lange's GitHub profile (opens in a new tab)",
     "ariaLinkedin": "Julien Lange's LinkedIn profile (opens in a new tab)",
-    "ariaKeyFigures": "Key figures",
     "role": "Senior JavaScript Developer",
     "subtitle": "Web Components, Design System & Fullstack",
     "pitch": "I build Web interfaces that stand the test of time. During 5 years at Fnac Darty, I learned that a good component isn't one that works — it's one that three different teams can use without calling you.",
     "location": "Île-de-France · Available",
-    "stats": {
-      "views": "views/day",
-      "markets": "markets",
-      "components": "components"
-    },
     "cta": {
       "cv": "Download my CV",
       "contact": "Contact me"

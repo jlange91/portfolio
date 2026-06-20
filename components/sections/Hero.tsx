@@ -32,12 +32,6 @@ export default function Hero() {
   const item = makeFadeUp(shouldReduce);
   const photoAnim = makeFadeIn(shouldReduce);
 
-  const stats = [
-    { value: "~100k", label: t("stats.views") },
-    { value: "8", label: t("stats.markets") },
-    { value: "30+", label: t("stats.components") },
-  ];
-
   return (
     <section
       id="accueil"
@@ -84,23 +78,6 @@ export default function Hero() {
                 ),
               })}
             </motion.p>
-
-            <motion.dl
-              variants={item}
-              className="mt-7 grid grid-cols-3 gap-4 max-w-sm"
-              aria-label={t("ariaKeyFigures")}
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <dt className="text-2xl font-extrabold gradient-text leading-none">
-                    {stat.value}
-                  </dt>
-                  <dd className="mt-1 font-mono text-[11px] dark:text-slate-500 text-slate-500 tracking-wide uppercase">
-                    {stat.label}
-                  </dd>
-                </div>
-              ))}
-            </motion.dl>
 
             <motion.p
               variants={item}
