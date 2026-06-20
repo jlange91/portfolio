@@ -149,8 +149,6 @@ export default function Nav() {
       <div
         ref={menuRef}
         id="mobile-menu"
-        role="dialog"
-        aria-modal="true"
         aria-label={t("ariaMenu")}
         className={`lg:hidden overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-[28rem]" : "max-h-0"} dark:bg-slate-900/98 bg-white/98 backdrop-blur-md border-b dark:border-slate-800 border-slate-200`}
       >

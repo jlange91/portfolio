@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { siteConfig } from "@/lib/data/site";
 import SkipLink from "@/components/ui/SkipLink";
-import HtmlLang from "@/components/ui/HtmlLang";
 
 export async function generateMetadata({
   params,
@@ -82,12 +80,10 @@ export default async function LocaleLayout({
 
   return (
     <>
-      <HtmlLang locale={locale} />
-      <Script
+      <script
         id="ld-json"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        strategy="afterInteractive"
       />
       <NextIntlClientProvider messages={messages}>
         <SkipLink />

@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Section from "@/components/ui/Section";
 import { siteConfig } from "@/lib/data/site";
+import { CONTACT_LIMITS } from "@/lib/data/contact";
 
 type FormState = "idle" | "loading" | "success" | "error" | "fallback";
 
@@ -23,6 +24,7 @@ function InputField({
   onChange,
   required,
   placeholder,
+  maxLength,
 }: {
   id: string;
   label: string;
@@ -31,6 +33,7 @@ function InputField({
   onChange: (v: string) => void;
   required?: boolean;
   placeholder?: string;
+  maxLength?: number;
 }) {
   return (
     <div>
@@ -46,24 +49,40 @@ function InputField({
         )}
       </label>
       {type === "textarea" ? (
-        <textarea
-          id={id}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          required={required}
-          placeholder={placeholder}
-          rows={5}
-          className="
-            w-full px-4 py-3 rounded-lg text-sm
-            dark:bg-slate-800 bg-white
-            dark:text-slate-200 text-slate-900
-            dark:border-slate-700 border-slate-300
-            border
-            dark:placeholder-slate-500 placeholder-slate-400
-            focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent
-            transition-colors resize-none
-          "
-        />
+        <>
+          <textarea
+            id={id}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            required={required}
+            placeholder={placeholder}
+            rows={5}
+            maxLength={maxLength}
+            className="
+              w-full px-4 py-3 rounded-lg text-sm
+              dark:bg-slate-800 bg-white
+              dark:text-slate-200 text-slate-900
+              dark:border-slate-700 border-slate-300
+              border
+              dark:placeholder-slate-500 placeholder-slate-400
+              focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent
+              transition-colors resize-none
+            "
+          />
+          {maxLength !== undefined && (
+            <p
+              className={`text-xs text-right mt-1 tabular-nums transition-colors ${
+                value.length >= maxLength
+                  ? "text-red-400"
+                  : value.length >= maxLength * 0.9
+                  ? "text-amber-400"
+                  : "dark:text-slate-500 text-slate-400"
+              }`}
+            >
+              {value.length} / {maxLength}
+            </p>
+          )}
+        </>
       ) : (
         <input
           id={id}
@@ -72,6 +91,7 @@ function InputField({
           onChange={(e) => onChange(e.target.value)}
           required={required}
           placeholder={placeholder}
+          maxLength={maxLength}
           className="
             w-full px-4 py-3 rounded-lg text-sm
             dark:bg-slate-800 bg-white
@@ -104,9 +124,8 @@ export default function Contact() {
   useEffect(() => {
     if (!liveRef.current) return;
     if (state === "loading") liveRef.current.textContent = t("form.submitting");
-    else if (state === "error") liveRef.current.textContent = errorMsg;
     else liveRef.current.textContent = "";
-  }, [state, errorMsg, t]);
+  }, [state, t]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -295,6 +314,7 @@ export default function Contact() {
                 onChange={(v) => setFormData((p) => ({ ...p, name: v }))}
                 required
                 placeholder={t("form.name.placeholder")}
+                maxLength={CONTACT_LIMITS.name.max}
               />
               <InputField
                 id="contact-email"
@@ -313,6 +333,7 @@ export default function Contact() {
                 onChange={(v) => setFormData((p) => ({ ...p, message: v }))}
                 required
                 placeholder={t("form.message.placeholder")}
+                maxLength={CONTACT_LIMITS.message.max}
               />
 
               {state === "error" && (
