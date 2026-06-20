@@ -1,35 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
+
+function subscribe(callback: () => void) {
+  const obs = new MutationObserver(callback);
+  obs.observe(document.documentElement, { attributeFilter: ["class"] });
+  return () => obs.disconnect();
+}
 
 export default function ThemeToggle() {
   const t = useTranslations("themeToggle");
-  const [isDark, setIsDark] = useState(true);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
+  const isDark = useSyncExternalStore(
+    subscribe,
+    () => document.documentElement.classList.contains("dark"),
+    () => true
+  );
 
   const toggle = () => {
     const next = !isDark;
-    setIsDark(next);
     document.documentElement.classList.toggle("dark", next);
     try {
       localStorage.setItem("theme", next ? "dark" : "light");
     } catch {}
   };
-
-  if (!mounted) {
-    return (
-      <div
-        className="w-9 h-9 rounded-lg bg-slate-800 dark:bg-slate-800 animate-pulse"
-        aria-hidden="true"
-      />
-    );
-  }
 
   const label = isDark ? t("toLight") : t("toDark");
 
@@ -39,6 +33,7 @@ export default function ThemeToggle() {
       aria-label={label}
       title={label}
       className="
+        theme-toggle-btn
         w-9 h-9 flex items-center justify-center rounded-lg
         dark:bg-slate-800 bg-slate-100
         dark:text-slate-300 text-slate-600

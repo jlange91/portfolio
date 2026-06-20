@@ -31,16 +31,10 @@
     "ariaPhoto": "Julien Lange, développeur JavaScript senior freelance",
     "ariaGithub": "Profil GitHub de Julien Lange (ouvre dans un nouvel onglet)",
     "ariaLinkedin": "Profil LinkedIn de Julien Lange (ouvre dans un nouvel onglet)",
-    "ariaKeyFigures": "Chiffres clés",
     "role": "Développeur JavaScript Senior",
     "subtitle": "Web Components, Design System & Fullstack",
     "pitch": "Je construis des interfaces Web qui tiennent sur la durée. Pendant 5 ans chez Fnac Darty, j'ai appris qu'un bon composant n'est pas celui qui fonctionne — c'est celui que trois équipes différentes peuvent utiliser sans t'appeler.",
     "location": "Île-de-France · Disponible",
-    "stats": {
-      "views": "vues/jour",
-      "markets": "marchés",
-      "components": "composants"
-    },
     "cta": {
       "cv": "Télécharger mon CV",
       "contact": "Me contacter"
@@ -238,6 +232,9 @@
       "unknown": "Une erreur est survenue."
     }
   },
+  "merci": {
+    "backToSite": "Retour au portfolio"
+  },
   "footer": {
     "built": "Construit avec Next.js · Déployé sur Vercel",
     "ariaGithub": "GitHub de Julien Lange (ouvre dans un nouvel onglet)",
@@ -248,7 +245,18 @@
     "title": "Julien Lange — Développeur JavaScript Senior | Web Components, Design System, Fullstack",
     "description": "Développeur web senior freelance, ~5 ans chez Fnac Darty sur des pages à 100 000+ visites/jour. Spécialisé Web Components, Design Systems et architecture micro-frontends. En transition vers des missions fullstack (Next.js, Node.js, Python).",
     "jobTitle": "Développeur JavaScript Senior — Web Components, Design System & Fullstack",
-    "keywords": ["Julien Lange", "développeur JavaScript", "freelance", "Web Components", "Design System", "Next.js", "Fnac Darty", "Île-de-France", "fullstack", "micro-frontends"],
+    "keywords": [
+      "Julien Lange",
+      "développeur JavaScript",
+      "freelance",
+      "Web Components",
+      "Design System",
+      "Next.js",
+      "Fnac Darty",
+      "Île-de-France",
+      "fullstack",
+      "micro-frontends"
+    ],
     "ogTitle": "Julien Lange — Senior JavaScript Developer",
     "tagline": "Développeur JavaScript Senior",
     "subtitle": "Web Components · Design System · Fullstack · Freelance"

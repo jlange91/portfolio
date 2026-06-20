@@ -13,10 +13,10 @@ export default function Experience() {
   const shouldReduce = useReducedMotion();
 
   const fnacStats = [
-    { value: "~100k", ...t.raw("stats.search") as { label: string; sub: string } },
-    { value: "~50k", ...t.raw("stats.home") as { label: string; sub: string } },
-    { value: "~50", ...t.raw("stats.smile") as { label: string; sub: string } },
-    { value: "8", ...t.raw("stats.markets") as { label: string; sub: string } },
+    { value: "~100k", ...(t.raw("stats.search") as { label: string; sub: string }) },
+    { value: "~50k", ...(t.raw("stats.home") as { label: string; sub: string }) },
+    { value: "~50", ...(t.raw("stats.smile") as { label: string; sub: string }) },
+    { value: "8", ...(t.raw("stats.markets") as { label: string; sub: string }) },
   ];
 
   return (
@@ -37,7 +37,9 @@ export default function Experience() {
                 {t(`items.${exp.id}.role`)}
               </p>
               <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm dark:text-slate-500 text-slate-500 font-mono">
-                <span>{exp.startDate} — {exp.endDate}</span>
+                <span>
+                  {exp.startDate} — {exp.endDate}
+                </span>
                 <span aria-hidden="true">·</span>
                 <span>{exp.location}</span>
               </div>

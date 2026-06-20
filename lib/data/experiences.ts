@@ -23,8 +23,14 @@ export const experiences: Experience[] = [
     endDate: "Juillet 2026",
     location: "Ivry-sur-Seine",
     highlights: [
-      { id: "web-components-lib", tags: ["Web Components", "Custom Elements", "NPM", "Design Tokens", "SCSS", "ESLint"] },
-      { id: "migration-cloud", tags: ["Micro-frontends", "Azure", "Razor/CSHTML", "Kafka", "Cosmos DB", "SCSS"] },
+      {
+        id: "web-components-lib",
+        tags: ["Web Components", "Custom Elements", "NPM", "Design Tokens", "SCSS", "ESLint"],
+      },
+      {
+        id: "migration-cloud",
+        tags: ["Micro-frontends", "Azure", "Razor/CSHTML", "Kafka", "Cosmos DB", "SCSS"],
+      },
       { id: "smile", tags: ["Figma", "CMS", "JavaScript", "8 marchés", "50 éditeurs"] },
       { id: "kamino", tags: ["JavaScript", "Publicité display", "Analytics", "Responsive"] },
       { id: "arrow", tags: ["JavaScript", "Web Components", "Marketplace", "Razor"] },

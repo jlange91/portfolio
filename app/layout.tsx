@@ -19,8 +19,8 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
-// Runs once on initial load — prevents FOUC before React hydrates
-const themeScript = `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s?s==='dark':d){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`;
+// Runs once on initial load — removes 'no-js' class and prevents FOUC before React hydrates
+const themeScript = `(function(){document.documentElement.classList.remove('no-js');try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s?s==='dark':d){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`;
 
 export const metadata: Metadata = {
   robots: { index: true, follow: true },
@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       lang={locale}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${jetbrainsMono.variable} dark`}
+      className={`${inter.variable} ${jetbrainsMono.variable} dark no-js`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
