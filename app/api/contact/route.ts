@@ -89,6 +89,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "invalid_body" }, { status: 400 });
   }
 
+  // Honeypot : champ « company » invisible côté client. S'il est rempli, c'est un
+  // bot → on simule un succès (200 / redirection merci) sans envoyer d'email.
+  const honeypot = (raw as Record<string, unknown> | null)?.company;
+  if (typeof honeypot === "string" && honeypot.trim() !== "") {
+    if (isNativeForm) {
+      return NextResponse.redirect(new URL(`/${locale}/merci`, req.url), 303);
+    }
+    return NextResponse.json({ ok: true }, { status: 200 });
+  }
+
   const result = ContactSchema.safeParse(raw);
   if (!result.success) {
     if (isNativeForm) {

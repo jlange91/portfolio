@@ -5,6 +5,7 @@ import { track } from "@vercel/analytics";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import Section from "@/components/ui/Section";
+import ObfuscatedEmail, { EmailAddressText } from "@/components/ui/ObfuscatedEmail";
 import { siteConfig } from "@/lib/data/site";
 import { CONTACT_LIMITS } from "@/lib/data/contact";
 
@@ -121,6 +122,8 @@ export default function Contact() {
   const [errorMsg, setErrorMsg] = useState("");
   const successRef = useRef<HTMLDivElement>(null);
   const liveRef = useRef<HTMLParagraphElement>(null);
+  // Honeypot anti-bot : rempli uniquement par les robots (invisible pour les humains).
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (state === "success") successRef.current?.focus();
@@ -140,7 +143,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, company: honeypotRef.current?.value ?? "" }),
       });
       const data = (await res.json()) as { ok?: boolean; fallback?: boolean; error?: string };
 
@@ -167,9 +170,8 @@ export default function Contact() {
     }
   };
 
-  const mailtoFallback = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-    `Message de ${formData.name || "…"}`
-  )}&body=${encodeURIComponent(formData.message || "")}`;
+  const fallbackSubject = `Message de ${formData.name || "…"}`;
+  const fallbackBody = formData.message || "";
 
   return (
     <Section id="contact" number="05" title={t("sectionTitle")} alternate>
@@ -187,10 +189,9 @@ export default function Contact() {
 
           <ul role="list" className="space-y-4">
             <li>
-              <a
-                href={`mailto:${siteConfig.email}`}
+              <ObfuscatedEmail
                 className="flex items-center gap-3 group"
-                aria-label={t("ariaEmail")}
+                ariaLabel={t("ariaEmail")}
               >
                 <div className="w-10 h-10 rounded-lg dark:bg-slate-800 bg-slate-100 flex items-center justify-center shrink-0 group-hover:bg-brand/10 transition-colors">
                   <svg
@@ -215,10 +216,10 @@ export default function Contact() {
                     Email
                   </p>
                   <p className="text-sm font-medium dark:text-slate-300 text-slate-700 group-hover:text-accent transition-colors">
-                    {siteConfig.email}
+                    <EmailAddressText />
                   </p>
                 </div>
-              </a>
+              </ObfuscatedEmail>
             </li>
 
             <li>
@@ -361,12 +362,13 @@ export default function Contact() {
               <p className="text-sm dark:text-slate-400 text-slate-600 mb-5">
                 {t("fallback.body")}
               </p>
-              <a
-                href={mailtoFallback}
+              <ObfuscatedEmail
+                subject={fallbackSubject}
+                body={fallbackBody}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold bg-brand hover:bg-brand/90 text-white transition-colors"
               >
                 {t("fallback.cta")}
-              </a>
+              </ObfuscatedEmail>
               <button
                 onClick={() => setState("idle")}
                 className="mt-4 block mx-auto text-sm dark:text-slate-500 text-slate-400 hover:text-accent transition-colors"
@@ -382,6 +384,20 @@ export default function Contact() {
               aria-label={t("form.ariaLabel")}
               className="rounded-xl p-6 md:p-8 dark:bg-slate-800/40 bg-white border dark:border-slate-700/60 border-slate-200 space-y-5"
             >
+              {/* Honeypot : hors écran, non focusable, ignoré des lecteurs d'écran.
+                  Un humain ne le remplit jamais ; les bots oui → soumission rejetée côté serveur. */}
+              <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden">
+                <label htmlFor="contact-company">Ne pas remplir ce champ</label>
+                <input
+                  ref={honeypotRef}
+                  id="contact-company"
+                  name="company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <InputField
                 id="contact-name"
                 name="name"
@@ -441,9 +457,9 @@ export default function Contact() {
 
               <p className="text-xs dark:text-slate-500 text-slate-400 text-center">
                 {t("emailFallback")}{" "}
-                <a href={`mailto:${siteConfig.email}`} className="text-accent hover:underline">
+                <ObfuscatedEmail className="text-accent hover:underline">
                   {t("emailFallbackLink")}
-                </a>
+                </ObfuscatedEmail>
               </p>
             </form>
           )}

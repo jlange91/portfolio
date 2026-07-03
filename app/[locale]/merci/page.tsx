@@ -1,5 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { siteConfig } from "@/lib/data/site";
+import ObfuscatedEmail from "@/components/ui/ObfuscatedEmail";
 
 export default async function MerciPage({
   params,
@@ -73,12 +73,12 @@ export default async function MerciPage({
         </p>
 
         {isFallback && (
-          <a
-            href={`mailto:${siteConfig.email}`}
+          <ObfuscatedEmail
+            noJsHref={`/${locale}#contact`}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold bg-brand hover:bg-brand/90 text-white transition-colors mb-6"
           >
             {t("fallback.cta")}
-          </a>
+          </ObfuscatedEmail>
         )}
 
         <a href={`/${locale}#contact`} className="block text-sm text-accent hover:underline">

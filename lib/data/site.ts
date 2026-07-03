@@ -7,7 +7,14 @@ export const siteConfig = {
   locale: "fr",
   jobTitle: "Développeur JavaScript Senior — Web Components, Design System & Fullstack",
   location: "Île-de-France",
-  email: "langejulien.pro@gmail.com",
+  // Alias « brûlable » (redirection DNS vers la vraie boîte). On expose ce
+  // couple user/domain plutôt que l'adresse concaténée pour permettre
+  // l'obfuscation côté client (cf. components/ui/ObfuscatedEmail.tsx).
+  emailUser: "contact",
+  emailDomain: "julienlange.dev",
+  get email() {
+    return `${this.emailUser}@${this.emailDomain}`;
+  },
   linkedin: "https://www.linkedin.com/in/julien-lange-870a52112/",
   github: "https://github.com/jlange91",
   cvPath: "/CV_Julien_Lange.pdf",
