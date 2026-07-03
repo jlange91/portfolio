@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { siteConfig } from "@/lib/data/site";
+import ObfuscatedEmail from "@/components/ui/ObfuscatedEmail";
 
 export default async function Footer() {
   const t = await getTranslations("footer");
@@ -36,13 +37,12 @@ export default async function Footer() {
           >
             LinkedIn
           </a>
-          <a
-            href={`mailto:${siteConfig.email}`}
-            aria-label={t("ariaEmail")}
+          <ObfuscatedEmail
+            ariaLabel={t("ariaEmail")}
             className="text-sm dark:text-slate-500 text-slate-500 dark:hover:text-accent hover:text-brand transition-colors"
           >
             Email
-          </a>
+          </ObfuscatedEmail>
         </div>
       </div>
     </footer>

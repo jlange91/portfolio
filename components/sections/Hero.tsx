@@ -5,6 +5,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { track } from "@vercel/analytics";
 import { useTranslations } from "next-intl";
 import { siteConfig } from "@/lib/data/site";
+import ObfuscatedEmail from "@/components/ui/ObfuscatedEmail";
 
 const stagger: Variants = {
   hidden: {},
@@ -181,12 +182,7 @@ export default function Hero() {
               <span className="dark:text-slate-700 text-slate-300" aria-hidden="true">
                 ·
               </span>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="text-sm dark:text-slate-500 text-slate-500 dark:hover:text-accent hover:text-brand transition-colors"
-              >
-                {siteConfig.email}
-              </a>
+              <ObfuscatedEmail className="text-sm dark:text-slate-500 text-slate-500 dark:hover:text-accent hover:text-brand transition-colors" />
             </motion.div>
           </motion.div>
 

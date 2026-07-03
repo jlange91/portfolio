@@ -73,7 +73,9 @@ export default async function LocaleLayout({
     name: siteConfig.name,
     jobTitle: t("jobTitle"),
     url: siteConfig.url,
-    email: `mailto:${siteConfig.email}`,
+    // Pas de champ `email` ici : le JSON-LD Person.email est la cible n°1 des
+    // scrapers et n'est lu que par des machines. Contact via le formulaire ou
+    // les profils `sameAs` ci-dessous.
     address: { "@type": "PostalAddress", addressRegion: "Île-de-France", addressCountry: "FR" },
     sameAs: [siteConfig.linkedin, siteConfig.github],
   };
